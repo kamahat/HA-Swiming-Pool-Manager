@@ -5,6 +5,20 @@
 ####################################################
 # https://raw.githubusercontent.com/remycrochon/home-assistant/master/packages/piscine.yaml
 
+input_number:
+  acquario_temp_high:
+    name: high temperature alert
+    initial: 31
+    min: 26
+    max: 34
+    step: 0.1
+  acquario_temp_low:
+    name: low temperature alert
+    initial: 21
+    min: 0
+    max: 25
+    step: 0.1
+
 utility_meter:
 # usage jour  
   energy_pisc_usage_daily:
@@ -51,7 +65,34 @@ sensor:
     type: time
     start: "{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}"
     end: "{{ now() }}"
-
+  - platform: statistics
+    name: 'Daily Piscine T Min'
+    unique_id: 38fad079-f68e-4a40-aa6f-5d7dd99d8009
+    entity_id: sensor.mouillezalin_temperature
+    state_characteristic: value_min
+    max_age:
+      hours: 24
+  - platform: statistics
+    name: 'Daily Piscine T Max'
+    unique_id: b31440f1-d8c4-455f-a627-04b85f43c352
+    entity_id: sensor.mouillezalin_temperature
+    state_characteristic: value_max
+    max_age:
+      hours: 24
+  - platform: statistics
+    name: 'Daily Piscine fond T Min'
+    unique_id: 94de4847-5b98-4548-82b4-c34569743535
+    entity_id: sensor.temp_piscine
+    state_characteristic: value_min
+    max_age:
+      hours: 24
+  - platform: statistics
+    name: 'Daily Piscine fond T Max'
+    unique_id: f64d9341-7504-40af-8a88-ed779084a32c
+    entity_id: sensor.temp_piscine
+    state_characteristic: value_max
+    max_age:
+      hours: 24
 ############################
 #  template Utiliy meter
 

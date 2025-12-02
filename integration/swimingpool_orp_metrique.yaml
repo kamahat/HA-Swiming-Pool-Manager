@@ -7,27 +7,8 @@
 # substance to oxidize or reduce another chemical substance.
 ####################################################
 
-#input_boolean:
-#  pisc_orp_metrique_yaml:
-#    name: "A voir plus tard pisc_orp_metrique.yaml"
 
 sensor:
-  # - platform: history_stats
-  #   name: chlore_derniere_heure
-  #   entity_id: switch.ppe_chlore
-  #   state: 'on'
-  #   type: time
-  #   end: '{{now().replace(minute=0).replace(second=0)}}'
-  #   duration: 01:00:00
-
-  # - platform: history_stats
-  #   name: chlore_derniere__48h
-  #   entity_id: switch.ppe_chlore
-  #   state: 'on'
-  #   type: time
-  #   end: '{{now()}}'
-  #   duration: 48:00:00
-
   # Statistiques orp
   - platform: statistics
     name: orp_stat_median
@@ -56,3 +37,17 @@ sensor:
     #max_age:
       # minutes: 30
 
+  - platform: statistics
+    name: 'Daily Cl Min'
+    unique_id: 85909078-6f2c-4fe2-b62e-27b885e0e383
+    entity_id: sensor.piscine_182_mouillezalin_chlorine
+    state_characteristic: value_min
+    max_age:
+      hours: 24
+  - platform: statistics
+    name: 'Daily Cl Max'
+    unique_id: 96b10d3a-2f24-4196-abb8-3b458b212191
+    entity_id: sensor.piscine_182_mouillezalin_chlorine
+    state_characteristic: value_max
+    max_age:
+      hours: 24
